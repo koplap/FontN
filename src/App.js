@@ -8,7 +8,10 @@ const [count, setCount] = useState(10);
 
   const name = "Kopalp Kaewwongsa";
 
-  const employee = [
+  const employee = [ 
+    { name: "AAAA", email : "aaaa@gmail.com", age: 19},
+    { name: "BBBB", email : "bbbb@gmail.com", age: 18},
+    { name: "CCCC", email : "cccc@gmail.com", age: 20},
   ]
 
   console.log(employee);
