@@ -1,24 +1,40 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from './Botton';
+import { useState } from 'react'; 
 
 function App() {
+const [count, setCount] = useState(10);
+
+  const name = "Kopalp Kaewwongsa";
+
+  const employee = [
+  ]
+
+  console.log(employee);
+
+
   return (
+    <>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>Add</button>
+      <button onClick={() => setCount(count - 1)}>Sub</button>
+
+
+      {employee.map((em, index) => (
+        <li key={index}>
+          ชื่อพนักงาน: {em.name} | อีเมล : {em.email} | อายุ : {em.age}
+          </li>
+      ))
+      }
+
+      <h1>Hello {name}</h1>
+      <Button text = "OK"/>
+      <Button text = "Cancel"/>
     </div>
+    <h1 className="text01">Test</h1>
+    </>
   );
 }
 
