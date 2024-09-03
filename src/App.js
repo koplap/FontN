@@ -1,44 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-import Button from './Botton';
-import { useState } from 'react'; 
-
+import React from 'react';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+import { Route, BrowserRouter, Routes } from 'react-router-dom'; 
+import Dashboard from './pages/Dashboard';
+import Users from './pages/Users';
+import About from './pages/About';
 function App() {
-const [count, setCount] = useState(10);
-
-  const name = "Kopalp Kaewwongsa";
-
-  const employee = [ 
-    { name: "AAAA", email : "aaaa@gmail.com", age: 19},
-    { name: "BBBB", email : "bbbb@gmail.com", age: 18},
-    { name: "CCCC", email : "cccc@gmail.com", age: 20},
-  ]
-
-  console.log(employee);
-
-
   return (
-    <>
-    <div className="App">
-      <h1>Count: {count}</h1>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={() => setCount(count - 1)}>Sub</button>
-
-
-      {employee.map((em, index) => (
-        <li key={index}>
-          ชื่อพนักงาน: {em.name} | อีเมล : {em.email} | อายุ : {em.age}
-          </li>
-      ))
-      }
-
-      <h1>Hello {name}</h1>
-      <Button text = "OK"/>
-      <Button text = "Cancel"/>
-    </div>
-    <h1 className="text01">Test</h1>
-    </>
+    <BrowserRouter>
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1">
+        <Header />
+          <Routes>
+            <Route path='/' element={<Dashboard />} />
+            <Route path='/user' element={<Users />} />
+            <Route path='/about' element={<About />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter >
   );
 }
-
 export default App;
