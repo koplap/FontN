@@ -1,25 +1,60 @@
+import './App.css';
 import React from 'react';
-import Sidebar from './components/Sidebar';
 import Header from './components/Header';
-import { Route, BrowserRouter, Routes } from 'react-router-dom'; 
+import Sidebar from './components/Sidebar';
+import { BrowserRouter, Route, Routes, useLocation, Navigate, Outlet } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
+import Account from './pages/Account';
 import Users from './pages/Users';
 import About from './pages/About';
-function App() {
+import { AuthProvider, useAuth } from './AuthProvider';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import NotPage from './pages/NotPage';
+
+const ProtectedRoute = ({ children }) => {
+  const { user } = useAuth();
+  const location = useLocation();
+  if (!user) {
+   return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  return children;
+ };
+
+const LayoutAdmin = () => {
   return (
-    <BrowserRouter>
+    <ProtectedRoute>
       <div className="flex">
-        <Sidebar />
-        <div className="flex-1">
+      <Sidebar />
+      <div className="flex-1">
         <Header />
-          <Routes>
-            <Route path='/' element={<Dashboard />} />
-            <Route path='/user' element={<Users />} />
-            <Route path='/about' element={<About />} />
-          </Routes>
+        <div className="m-6 p-10 bg-gray-50 min-h-screen rounded-lg">
+          <Outlet />
         </div>
       </div>
-    </BrowserRouter >
+      </div>
+    </ProtectedRoute>
+   );
+ }
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+          <Routes>
+            <Route element={<LayoutAdmin />}>
+                <Route path='/' element={<Dashboard />} />
+                <Route path='/account' element={<Account />} />
+                <Route path='/user' element={<Users />} />
+                <Route path='/about' element={<About />} />
+            </Route>
+            <Route path='*' element={<NotPage/>} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+    </BrowserRouter>
+  </AuthProvider>
   );
 }
+
 export default App;

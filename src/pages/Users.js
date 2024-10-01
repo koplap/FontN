@@ -18,7 +18,6 @@ function Users() {
       <td className="px-5 py-5 text-sm">{u.address.city}</td>
     </tr>
   ));
-
   return (
     <>
       <h1 className="text-red-300 font-bold">แสดงชื่อผู้ใช้งาน</h1>
