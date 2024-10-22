@@ -11,6 +11,9 @@ export default function Sidebar() {
                 <Link to="/" className="block py-3 px-4 hover:bg-gray-700"> 
                     Dashboard
                 </Link>
+                <Link to="/myblog" className="block py-3 px-4 hover:bg-gray-700"> 
+                    จัดการโพสต์
+                </Link>
                 <Link to="/user" className="block py-3 px-4 hover:bg-gray-700">
                     Users
                 </Link>
